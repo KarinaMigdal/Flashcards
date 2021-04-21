@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <div class="main">
+  <div class="login-container">
+    <div class="login-box">
       <header>
-        <img src="../assets/user.svg" alt="user image" class="img_user">
+        <img src="../assets/user.svg" alt="user image" class="img-user">
         <h1>Sign up</h1>
         <h4>It's free and only takes a minute.</h4>
       </header>

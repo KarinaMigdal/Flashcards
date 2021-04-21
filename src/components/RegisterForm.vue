@@ -1,47 +1,51 @@
 <template>
     <form>
-        <Form name="login_form" class="form" @submit="register" :validation-schema="schema" v-slot="{ errors }">
-
-            <img src="../assets/email.svg" alt="email icon" class="icon-mail-alt icon">
+        <Form 
+        name="login_form" 
+        class="form" 
+        @submit="register" 
+        :validation-schema="schema" 
+        v-slot="{ errors }">
+            <img src="../assets/email.svg" 
+            alt="email icon" 
+            class="icon-form">
             <Field 
             name="email"
             type="email" 
-            id="email"
             v-model="email" 
             class="input-text" 
             :class="{'ivalid-input': errors.email}"
             placeholder="Email" 
-            autocomplete="email" />
+            autocomplete="email"/>
 
             <div class="form-error">
                 {{errors.email}}
             </div>
-            <div class="input"> 
+            <div class="input-box"> 
                 <img 
                 src="../assets/key.svg" 
                 alt="key icon" 
-                class="icon-key icon">
+                class="icon-form">
 
                 <img 
                 v-if="!isVisible"
                 src='../assets/visibility.svg'
                 v-bind="isVisible"
-                alt="key" 
-                class=" icon-password icon"
+                alt="toogle password visibility" 
+                class=" icon-password icon-form"
                 @click="switchVisibility">
                 <img 
                 v-if="isVisible"
                 src='../assets/invisible.svg'
                 v-bind="isVisible"
-                alt="key" 
-                class=" icon-password icon"
+                alt="toogle password visibility" 
+                class="icon-password icon-form"
                 @click="switchVisibility">
 
 
                 <Field 
                 name="newPassword"
                 :type="passwordFieldType"  
-                id="newPassword" 
                 v-model="newPassword" 
                 class="input-text"  
                 :class="{'ivalid-input': errors.newPassword}"
@@ -51,29 +55,30 @@
             <div class="form-error">
                 {{errors.newPassword}}
             </div>
-            <div class="input">
-                <img src="../assets/key.svg" alt="key icon" class="icon-key icon">
+            <div class="input-box">
+                <img 
+                src="../assets/key.svg" 
+                alt="key icon" 
+                class="icon-form">
 
                 <img 
                 v-if="isVisible"
                 src='../assets/invisible.svg'
                 v-bind="isVisible"
-                alt="key" 
-                class=" icon-password icon"
+                alt="toogle password visibility" 
+                class=" icon-password icon-form"
                 @click="switchVisibility">
                 <img 
                 v-if="!isVisible"
                 src='../assets/visibility.svg'
-               
                 v-bind="isVisible"
-                alt="key" 
-                class=" icon-password icon"
+                alt="toogle password visibility" 
+                class=" icon-password icon-form"
                 @click="switchVisibility">
 
                 <Field
                 name="confirmPassword"
                 :type="passwordFieldType" 
-                id="new_password_conf" 
                 v-model="confirmPassword" 
                 class="input-text" 
                 :class="{'ivalid-input': errors.confirmPassword}"
@@ -83,21 +88,11 @@
             <div class="form-error">
                 {{errors.confirmPassword}}
             </div>
-            <!-- Anti-spam: honeypot method -->
-            <span class="honey-row">
-                <label for="honey">If you are human, don't fill that</label>
-                <Field 
-                type="text" 
-                name="honey" 
-                id="honey" 
-                v-model="honey" />
-            </span>
-
             <div class="checkbox">
                 <Field 
                 name="acceptTerms"
                 type="checkbox" 
-                :value="true"
+                :value="false"
                 id="privacy_statement" 
                 class="input-check checkbox-required" 
                 :class="{'ivalid-input': errors.acceptTerms}"
@@ -115,10 +110,14 @@
             </div>
             <button 
             type="submit" 
-            class=" btn buttonSubmit">
+            class=" btn button-submit">
             Sign up
             </button>
-            <h5 class="footer_text" id="text_to_sign_in" ><router-link class="accountText" to="/login">Sign in</router-link></h5>
+            <nav>
+                <h5 class="footer-text text-to-loggin">
+                    <router-link class="account-text" to="/login">Sign in</router-link>
+                </h5>
+            </nav>    
         </Form>
     </form>
 </template>
@@ -140,7 +139,6 @@ export default {
             userName: '',
             newPassword: '',
             confirmPassword: '',
-            honey: '',
         }
     },
     created() {
@@ -183,5 +181,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.text-to-loggin::before {
+    content: "Already have an account? ";
+}
 </style>

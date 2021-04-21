@@ -1,18 +1,18 @@
 <template>
-    <main>
-        <div class="main-content">
-            <div class="row">
-                <div class="card-frame">
-                    <div class="folder-name" >
-                        <span>{{ folder.name }}</span>
-                    </div>
-                </div>
-                <div class="message-area" 
-                :class="{'show-message': messages[0].isShowMessage, 'hide-message': messages[0].isHideMessage }" >
-                    {{ messages[0].message }}
+    <div class="major-box">
+        <div class="flex-box">
+            <div class="card-frame">
+                <div class="folder-name-box" >
+                    <span class="folder-name">{{ folder.name }}</span>
                 </div>
             </div>
-            <div class="row">
+            <div class="message-area" 
+            :class="{'show-message': messages[0].isShowMessage, 'hide-message': messages[0].isHideMessage }" >
+                {{ messages[0].message }}
+            </div>
+        </div>
+        <main>        
+            <div class="flex-box">
                 <div class="input-box"> 
                     <input 
                     v-model="newFlashcard.front_text" 
@@ -25,19 +25,17 @@
                     <div class="buttons-area">
                         <button 
                         @click="addFlashcard(newFlashcard);" 
-                        id="save-btn" 
-                        class="btn flashcard-btn">
+                        class="btn flashcard-btn save-btn">
                             <img src="../assets/floppy-disk.svg" 
-                            alt="save flashcard" 
+                            alt="save the flashcard" 
                             class="icon-medium">
                             <span class="tooltiptext">save the flashcard</span>
                         </button>
                         <button 
                         @click="clearFlashcard" 
-                        id="remove-btn" 
-                        class="btn flashcard-btn">
+                        class="btn flashcard-btn remove-btn">
                             <img src="../assets/delete.svg" 
-                            alt="recycle bin" 
+                            alt="remove the flashcard" 
                             class="icon-medium">
                             <span class="tooltiptext">clear the flashcard</span>
                         </button>
@@ -61,34 +59,35 @@
                 class="input-text">
                 </textarea>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 </template>
 
 <script>
 import { mapMutations, mapState, mapActions } from 'vuex';
+
 export default {
     name: 'NewFlashCard',
-    computed: {...mapState(['newFlashcard', 'folders', 'currentFolderIndex', 'messages', 'folder' ]),
+
+    computed: {...mapState(['newFlashcard', 'messages', 'folder' ]),
     },
 
-    methods: {...mapMutations(['showMessage', 'showPage', 'clearPageVisibility', 'saveFlashcard', 'clearFlashcard', 'toogleVisibility' ]),
-    ...mapActions(['addFlashcardFetch']) ,
+    methods: {...mapMutations([ 'clearFlashcard', 'toogleVisibility' ]),
+    ...mapActions(['createFlashcard']),
+    
         addFlashcard(flashcard){
             let data = {
                 front_text: flashcard.front_text,
                 back_text: flashcard.back_text,
             };
-            this.addFlashcardFetch(data)
+            this.createFlashcard(data)
         }
     } 
 }
 </script>
 
 <style scoped>
-
-
-.main-content {
+.major-box {
     height: 460px;
     width: 860px; 
     display: flex;
@@ -96,14 +95,14 @@ export default {
     justify-content: space-between;
 }
 
-.row {
+.flex-box {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.folder-name {
+.folder-name-box {
     cursor: default;
     font-size: 35px;
     height:100px;
@@ -113,7 +112,7 @@ export default {
     align-items: center;
 }
 
-.folder-name span{
+.folder-name {
     width: 90%;
     white-space: nowrap;
     overflow: hidden;
@@ -141,7 +140,7 @@ export default {
     transform: scale(1);
 }
 
- .message-area {
+.message-area {
     border: 1px solid black;
     width: 310px;
     height: 100%;
@@ -155,7 +154,6 @@ export default {
     overflow: hidden;
     border-radius: 20px;
     transition: transform ease-out 0.5s;
-
 }
 
 .buttons-area {
@@ -220,26 +218,26 @@ textarea:focus {
     border: 1px solid black;
 }
 
-#save-btn {
+.save-btn {
     background-color:#C6EBC9;
 }
 
-#save-btn:hover {
+.save-btn:hover {
     background-color: rgb(142, 204, 163);
 }
 
-#remove-btn {
+.remove-btn {
    background-color: #d35d6e;
 }
 
-#remove-btn:hover {
+.remove-btn:hover {
    background-color: #d64057;
 }
 
 
 /* For mobile: */
 @media screen  and (max-width: 1000px) {
-    .main-content, .row {
+    .major-box, .flex-box {
         width: 100%;
         height: auto;
     }
@@ -247,12 +245,15 @@ textarea:focus {
     .flashcard-textarea-box {
         height: 45vh;
     }
-    
+
+    .message-area {
+        height: 106px;
+    }
 }
 
 @media screen  and (max-width: 860px) {
 
-    .row {
+    .flex-box {
         flex-direction: column;
         flex-wrap: wrap;
     }
@@ -281,7 +282,7 @@ textarea:focus {
         width: 100%;
     }
 
-    .folder-name, .message-area {
+    .folder-name-box, .message-area {
         width: 100%;
         height: 60px;
         padding: 0;
@@ -291,18 +292,16 @@ textarea:focus {
         font-size: 20px;
         width: 100%;
         padding: 0;
-        border-radius: 7px;
+        border-radius: 20px;
         margin-top: 10px;
     }
-
-
 
     @media screen  and (max-width: 550px) {
         .flashcard-textarea-box {
             height: 52vh;
         }
 
-        .folder-name {
+        .folder-name-box {
             font-size: 1.3em;
             height: 45px;
         }

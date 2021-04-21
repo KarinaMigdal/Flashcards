@@ -7,7 +7,6 @@
             <AppInfo/>
        </div>
     </div> 
-    
 </template>
 
 <script>
@@ -17,13 +16,12 @@ import AppInfo from '@/components/AppInfo.vue'
 import Header from '@/components/Header.vue'
 import { mapState } from 'vuex'
 
-
 export default {
     name: 'Main',
     components: { SideMenu, Error, AppInfo, Header } ,
     data () {
         return {
-            isActive:false,
+            isActive: false,
         }
     },
     computed: {
@@ -39,5 +37,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

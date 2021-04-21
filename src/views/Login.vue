@@ -1,13 +1,13 @@
 <template>
-    <div class="container">
-        <div class="main">
-            <main>
-              <img  src="../assets/user.svg" alt="user image" class="img_user">
-              <h1>Sign in</h1>   
-              <LoginForm/>
-            </main>  
-        </div>
+  <div class="login-container">
+    <div class="login-box">
+      <img  src="../assets/user.svg" alt="user image" class="img-user">
+      <h1>Sign in</h1>   
+      <main>
+        <LoginForm/>
+      </main>  
     </div>
+  </div>
 </template>
 
 <script>
@@ -21,9 +21,8 @@ export default {
 }
 </script>
 
-<style >
-
-.container {
+<style>
+.login-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,14 +37,18 @@ export default {
   border-radius: 20px;
 }
 
-.main {
+.login-box {
   min-height: 400px; 
   width: 100%;
   padding: 70px 50px 70px 50px;
 }
 
+.img-user {
+  height: 70px;
+}
+
 @media screen  and (max-width: 600px) {
-  .container {
+  .login-container {
     padding: 0 50px;
     margin: 0;
     border-radius: 0;
@@ -54,42 +57,12 @@ export default {
     height: 100vh;
     min-height: 500px;
   }
-  .main {
+
+  .login-box {
     padding: 10px 0 40px 0;
     min-height: 500px;
     min-width: 300px;
   }
 }
 
-
-/* loading button: */
-.loading {
-    position: relative;
-    pointer-events: none;
-    opacity:0.5;
-}
-
-.loading::after {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    border-right-color: rgba(0,0,0,0.7);
-    transform: translate(-50%, -50%) rotate(0deg);
-    content:"";
-    animation: rotateSingleLoading 0.3s infinite linear;
-    z-index: 10;
-}
-
-@keyframes rotateSingleLoading {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
 </style>

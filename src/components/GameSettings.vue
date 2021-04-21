@@ -75,6 +75,7 @@ export default {
     },
     methods: {
         ...mapMutations([ 'play', 'gameErrorShow', 'gameErrorHide', 'setLimit' ]),
+        
         redirect() {
             this.$router.push("/")
         },
@@ -102,7 +103,6 @@ export default {
         },
 
         playGame(){
-            console.log(this.gameLimit)
             if(this.selected.length !== 0) {
                 const tab = [];
                 for (const folder of this.selected) {
@@ -119,7 +119,6 @@ export default {
                 this.gameErrorShow();
             }
         },
-
     }
 }
 </script>

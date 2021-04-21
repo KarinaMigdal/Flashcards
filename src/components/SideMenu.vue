@@ -1,47 +1,58 @@
 <template>
     <div>
         <aside>
-            <div class="bmMenu" :class="{ active: isActiveBM }" >
+            <div class="bm-menu" :class="{ active: isActiveBM }" >
                 <nav>
-                    <div class="bmItemList">
+                    <div class="bm-item-list">
                         <router-link to="/">
                             <div class="menu-option">
-                                <img class="someIcon" src="../assets/home.svg" alt="home image">
+                                <img class="bm-icon" 
+                                src="../assets/home.svg" 
+                                alt="home image">
                                 <span>Home</span>
                             </div>
                         </router-link>
                         <router-link to="/about-app">
                             <div class="menu-option">
-                                <img class="someIcon" src="../assets/document.svg" alt="user image">
+                                <img class="bm-icon" 
+                                src="../assets/document.svg" 
+                                alt="user image">
                                 <span>About the app</span>
                             </div>
                         </router-link>
                         <router-link to="/about-authors">
-
                             <div class="menu-option">
-                                <img class="someIcon" src="../assets/group.svg" style="height: 40px" alt="user image">
+                                <img class="bm-icon" 
+                                src="../assets/group.svg" 
+                                style="height: 40px" 
+                                alt="user image">
+                                
                                 <span>About the authors</span>
                             </div>
                         </router-link>
                         <router-link to="/settings">
                             <div class="menu-option">
-                                <img class="someIcon" src="../assets/settings.svg" alt="user image">
+                                <img class="bm-icon" 
+                                src="../assets/settings.svg" 
+                                alt="user image">
                                 <span>Settings</span>
                             </div>
                         </router-link>
 
                         <div class="menu-option" @click="logOut">
-                            <img class="someIcon" src="../assets/sign-out.svg" alt="user image">
+                            <img class="bm-icon" 
+                            src="../assets/sign-out.svg" 
+                            alt="user image">
                             <span>Log out</span>
                         </div>
                     </div>
                 </nav>
                 <span class="close" @click="onClick"></span>
             </div>
-            <div class="bmButton" @click="onClick" >
-                <span class="bmBars" style="top: 0%;"></span>
-                <span class="bmBars" style="top: 40%;"></span>
-                <span class="bmBars" style="top: 80%;"></span>
+            <div class="bm-button" @click="onClick" >
+                <span class="bm-bars" style="top: 0%;"></span>
+                <span class="bm-bars" style="top: 40%;"></span>
+                <span class="bm-bars" style="top: 80%;"></span>
             </div>
         </aside>
     </div>
@@ -69,7 +80,7 @@ export default {
 
 <style scoped>
     
-    .bmMenu {
+    .bm-menu {
         border-radius: 20px;
         background-color: #f0f0f0;
         height: 100%;
@@ -87,7 +98,7 @@ export default {
         width: 0px;
     }
 
-    .bmItemList{
+    .bm-item-list{
         padding: 30px 0;
         color: #b8b7ad;
         font-size: 25px;
@@ -96,7 +107,7 @@ export default {
         align-items: center;
     }
 
-   .someIcon {
+   .bm-icon {
         height: 35px; 
    }
   
@@ -132,9 +143,11 @@ export default {
         opacity: 0.3;
         transition: opacity 0.5s;
     }
+
     .close:hover {
         opacity: 1;
     }
+
     .close:before, .close:after {
         position: absolute;
         left: 15px;
@@ -143,15 +156,17 @@ export default {
         width: 2px;
         background-color: #333;
     }
+
     .close:before {
         transform: rotate(45deg);
     }
+
     .close:after {
         transform: rotate(-45deg);
     }
 
     /* Burger menu */
-    .bmButton {
+    .bm-button {
         cursor: pointer;
         height: 30px;
         left: 30px;
@@ -162,10 +177,12 @@ export default {
         transition: opacity 0.3s;
         z-index: 20;
     }
-    .bmButton:hover {
+
+    .bm-button:hover {
         opacity: 1;
     }
-    .bmBars {
+
+    .bm-bars {
         height: 20%;
         left: 0;
         position: absolute;
@@ -174,7 +191,7 @@ export default {
     }
 
     @media screen and (max-width: 1000px) {
-        .bmMenu {
+        .bm-menu {
             position: fixed;
             width: 300px;
         }
@@ -195,7 +212,7 @@ export default {
     }
 
      @media screen and (max-width: 550px) {
-         .bmButton {
+         .bm-button {
             position: fixed;
             opacity: 0.3;
             top: 15px;
@@ -204,14 +221,14 @@ export default {
      }
 
     @media screen and (max-width: 450px) {
-        .bmMenu {
+        .bm-menu {
             width: 100vw;
         } 
         .active {
             width: 0px;
 
         }
-        .bmButton {
+        .bm-button {
             left:20px
         }
     }

@@ -25,6 +25,10 @@ body {
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* SCROLLBAR */
 /* width */
 ::-webkit-scrollbar {

@@ -1,12 +1,14 @@
 <template>
-        <div v-if="game.showScore" :class="{ showScore : game.showScore }" >
+        <div v-if="game.showScore" :class="{ 'show-score' : game.showScore }" >
             <section>
-                <img src="../assets/fi-rr-trophy.svg" alt="trophy" class="icon-score"
-                            @click='removeFolder(folder.id);'>
-                <div class="rate">
-                    <h1>Score: {{ game.score }} / {{ game.   randomFlashcards.length }}</h1>
+                <img 
+                src="../assets/fi-rr-trophy.svg" 
+                alt="trophy" 
+                class="icon-score">
+                <div>
+                    <h1>Score: {{ game.score }} / {{ game.randomFlashcards.length }}</h1>
                 </div>
-                <button class="btn buttonOk" @click="hideScore">OK</button> 
+                <button class="btn button-ok" @click="hideScore">OK</button> 
             </section>
         </div>
    
@@ -27,7 +29,7 @@ export default {
     height: 50px;
 }
 
-.showScore {
+.show-score {
     border-radius: 30px;
     width: 600px;
     height: 490px;
@@ -42,20 +44,17 @@ export default {
     align-content: center;
 }
 
-
-
-.buttonOk {   
+.button-ok {   
     font-size: 25px; 
     width: 70%;
     margin: 25px auto;
     padding: 15px 0px; 
 }
 
-
-
-@media screen and(max-width: 1000px){
-    .showScore {
-    width: 100%;
+@media screen  and (max-width: 1000px) {
+    .show-score {
+        min-width: 350px;
+        width: 100%;
     }
 }
 </style>

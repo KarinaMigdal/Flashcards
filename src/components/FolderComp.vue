@@ -120,7 +120,7 @@ export default {
 
     methods: { 
         ...mapMutations(['editFlashcard', 'toogleVisibility' ]), 
-        ...mapActions(['handleFolder', 'downloadFlashcards', 'removeFlashcard',]),
+        ...mapActions(['handleFolderName', 'downloadFlashcards', 'removeFlashcard',]),
 
         redirect(path) {
             this.$router.push(`${path}`)
@@ -163,7 +163,7 @@ export default {
         saveFolder(folderName){
             if (folderName.length > 0) {
                 this.isValid = true;
-                this.handleFolder()
+                this.handleFolderName()
             }
             else {
                 this.isValid = false;
@@ -301,6 +301,10 @@ tbody:hover > tr:hover td, .icon-table:hover {
     .table-box {
         height: calc(86vh - 95px);
     }
+
+    tbody  {
+        height: 70vh;
+    }
 }
 
 @media screen  and (max-width: 860px) {
@@ -353,6 +357,10 @@ tbody:hover > tr:hover td, .icon-table:hover {
     thead tr th:nth-child(4), thead tr th:nth-child(5) {
         width: 51px;
     } 
+
+    tbody  {
+        height: 65vh;
+    }
 }
 
 @media screen  and (max-width: 550px) {
@@ -371,6 +379,10 @@ tbody:hover > tr:hover td, .icon-table:hover {
 
     thead tr th:nth-child(3), tbody tr td:nth-child(3) {
         display: none;
+    }
+
+    tbody  {
+        height: 68vh;
     }
 }
 

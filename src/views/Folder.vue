@@ -8,7 +8,6 @@
             <Flashcard v-show="!toogle"/>
        </div>
     </div> 
-    
 </template>
 
 <script>
@@ -18,7 +17,6 @@ import Flashcard from '@/components/NewFlashCard.vue'
 import Error from '@/components/Error.vue'
 import Header from '@/components/Header.vue'
 import { mapState } from 'vuex'
-
 
 export default {
     name: 'Main',
@@ -37,7 +35,6 @@ export default {
            this.isActive = !value
         }
     },
-    
 }
 </script>
 

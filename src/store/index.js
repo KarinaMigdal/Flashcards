@@ -1,6 +1,6 @@
 import { requestService } from '../services/request.service';
-import { createStore } from 'vuex'
-import router from '../router/index.js'
+import { createStore } from 'vuex';
+import router from '../router/index.js';
 
 export default createStore({
   state() {
@@ -10,7 +10,6 @@ export default createStore({
       toogle:true,
       newFlashcard: {
         id: '00',
-        isCheck: false,
         front_text: '',
         back_text: '',
       },
@@ -25,9 +24,6 @@ export default createStore({
       },
 
       messages: [
-        {message:'',
-        isShowMessage:false,
-        isHideMessage:true,},
         {message:'',
         isShowMessage:false,
         isHideMessage:true,},
@@ -53,28 +49,13 @@ export default createStore({
     }
   },
 
-  getters: {
-
-    folderName: state => {
-      return state.folders;
-    },
-  },
+  getters: {},
 
   mutations: {
-    changeSuccessMessage(state, message){
-      state.success.message = message;
-    },
-
-    toogleVisibility(state) {
-      state.toogle = !state.toogle;
-    },
-
-    clearMessage(state){
-      state.error.isVisible = false;
-    },
+    
 
     // GAME
-    hideScore(state) {
+    hideScore(state){
       state.game.showScore = false;
       state.game.isStarted = false;
       state.game.randomFlashcards = [{
@@ -85,7 +66,7 @@ export default createStore({
       state.game.score = 0;
     },
 
-    rate (state, point) {
+    rate (state, point){
       state.game.isRateDisabled = true;
       if (point == 1) {
         state.thumbUpClicked = true;
@@ -100,8 +81,6 @@ export default createStore({
     setLimit(state, gameLimit) {
       state.game.limit = gameLimit;
     },
-
-
 
     play(state, selectedCards){
       const min = 0;
@@ -124,7 +103,6 @@ export default createStore({
       }
       state.game.randomFlashcards = randomFlashcards;
       state.game.isStarted = true;
-
     },
 
     gameErrorShow(state){
@@ -135,8 +113,7 @@ export default createStore({
       state.game.settingsError = false;
     },
     
-
-    nextFlashcard(state) {
+    nextFlashcard(state){
       if (state.game.iterator+1 < state.game.randomFlashcards.length && state.game.iterator+1 < Number(state.game.limit)  ) {
         state.game.iterator = ++state.game.iterator;
       }
@@ -149,15 +126,11 @@ export default createStore({
     },
     
     // FOLDER
-    clearFolderMenuVisibility(state, folderId) {
-      for (const folder of state.folders) {
-        if (folder.id !== folderId) {
-          folder.menuIsVisible = false;
-        }
-      }
+    toogleVisibility(state){
+      state.toogle = !state.toogle;
     },
 
-    editFlashcard(state, clickedFlashcard) {
+    editFlashcard(state, clickedFlashcard){
       state.newFlashcard.front_text = clickedFlashcard.front_text;
       state.newFlashcard.back_text = clickedFlashcard.back_text;
       state.newFlashcard.id = clickedFlashcard.id;
@@ -169,38 +142,45 @@ export default createStore({
       }
     },
 
-    // MAIN
+    setFlashcards (state, folder){
+      state.folder = folder;
+    },
 
-    setFolders (state, response) {
-      for (const folder of response.data) {
+    changeId(state, folderId){
+      state.folder.id = folderId;
+    },
+
+    // MAIN
+    clearFolderMenuVisibility(state, folderId){
+      for (const folder of state.folders){
+        if (folder.id !== folderId){
+          folder.menuIsVisible = false;
+        }
+      }
+    },
+
+    setFolders(state, response){
+      for (const folder of response.data){
         folder.menuIsVisible = false;
       }
       state.folders = response.data;
     },
 
-    setFlashcards (state, folder) {
-      state.folder = folder;
-    },
-
-    changeId(state, folderId) {
-      state.folder.id = folderId;
-    },
-
-    createNewFolder(state) {
+    createNewFolder(state){
       let newFolder = {
         flashcards: [],
         id: '000',
         name: '', 
       };
-      state.folder = newFolder
+      state.folder = newFolder;
     },
 
-    removeFolder(state, clickedFolderId) {
+    removeFolder(state, clickedFolderId){
       state.folders = state.folders.filter(folder => folder.id !== clickedFolderId);
     },
 
     // NEW FLASHCARD
-    showMessage(state) {
+    showMessage(state){
       if (state.newFlashcard.front_text.length === 0 || state.newFlashcard.back_text.length === 0) {
         state.messages[0].message = "Fields cannot be empty!"
       }
@@ -215,80 +195,78 @@ export default createStore({
         }, 2000);
     },
 
-    clearFlashcard(state) {
+    clearFlashcard(state){
       state.newFlashcard.front_text = '';
       state.newFlashcard.back_text = '';
       state.newFlashcard.id = '00';
     },
 
-    saveFlashcard(state, flashcard) {
+    saveFlashcard(state, flashcard){
       state.folder.flashcards.push(flashcard);
     },
 
-    changeFlashcard(state, changedflashcard) {
+    changeFlashcard(state, changedflashcard){
       const index = state.folder.flashcards.findIndex(flashcard => flashcard.id === changedflashcard.id);
       state.folder.flashcards.splice(index, 1, changedflashcard);
     },
   
     // LOGIN
-    switchVisibility(state) {
+    switchVisibility(state){
       state.passwordFieldType = state.passwordFieldType === 'password' ? 'text' : 'password';
       state.isVisible = !state.isVisible
     },
 
-    showError (state, message) {
+    showError (state, message){
       state.error.message = message;
       state.error.isVisible = true;
     },
 
-    hideError (state) {
+    hideError (state){
       state.error.message = '';
+      state.error.isVisible = false;
+    },
+
+    changeSuccessMessage(state, message) {
+      state.success.message = message;
+    },
+
+    clearMessage(state){
       state.error.isVisible = false;
     },
   },
 
-
-
-
-
-
   actions: {
-    async register({ commit }, data) {
+    async register({ commit }, data){
       let result = await requestService.register(data)
       if(result.status === "ok"){
         const message = "Your account has been successfully created."
         commit('hideError');
         commit('changeSuccessMessage', message)
-
-        
         router.push('/success');
-
       }
       else {
         commit('showError', result)
       }
     },
 
-    async login({ commit }, data) {
+    async login({ commit }, data){
       let result = await requestService.login(data)
       if(result.status === "ok"){
         commit('hideError')
         router.push('/');
       }
-
       else {
         commit('showError', result)
       }
-
     },
 
-    async fetchFolders({ commit }) {
+    async downloadFolders({ commit }){
       const result = await requestService.downloadFolders();
       if (result.status === 'ok'){
         commit('setFolders', result);
       }
       else {
-        if (result.status === 401) {
+        if (result.status === 401){
           router.push('/login');
         }
         else {
@@ -297,8 +275,7 @@ export default createStore({
       }
     },
 
-
-    async downloadFlashcards({ commit}, folderId) {
+    async downloadFlashcards({ commit}, folderId){
       if(folderId === '000') {
         commit('createNewFolder');
       }
@@ -308,8 +285,7 @@ export default createStore({
       }
     },
 
-
-    async handleFolder({ commit, state }) {
+    async handleFolderName({ commit, state }){
       const url = 'http://www.flashcards.com:5000/api/folders';
       if(state.folder.id === '000') {
         const data = { 
@@ -331,28 +307,26 @@ export default createStore({
           folderId : state.folder.id,
         }
         const method = "PUT"
-        const result = await requestService.handleFolder(data, method, url);
-        console.log(result)
+        await requestService.handleFolder(data, method, url);
       }
     },
 
-    async deleteFolder({ commit }, folderID) {
+    async deleteFolder({ commit }, folderID){
       const url = 'http://www.flashcards.com:5000/api/folders';
       const method = "DELETE";
-      const data = {folderId : folderID}
-      let result = await requestService.handleFolder(data, method, url)
+      const data = {folderId : folderID};
+      let result = await requestService.handleFolder(data, method, url);
       if(result.status === "ok"){
-        console.log(`Delete method response: ${result.status}`);
-        commit('removeFolder', folderID)
+        commit('removeFolder', folderID);
       }
       else {
         commit('showError', result);
       }
     },
 
-    async addFlashcardFetch({ commit, state }, data) {
+    async createFlashcard({ commit, state }, data){
       if ( state.newFlashcard.front_text.length > 0 && state.newFlashcard.back_text.length > 0) {
-        let folderId = state.folder.id
+        let folderId = state.folder.id;
         if(state.newFlashcard.id === '00'){
           const method = "POST";
             const result = await requestService.handleFlashcard(method,data, folderId);
@@ -361,7 +335,6 @@ export default createStore({
                 front_text: result.data.front_text,
                 back_text: result.data.back_text,
                 id: result.data.id,
-                
               }
               commit('saveFlashcard', flashcard);
               commit('showMessage');
@@ -376,15 +349,14 @@ export default createStore({
           data.flashcardId = state.newFlashcard.id;
           const method = "PUT";
             const result = await requestService.handleFlashcard(method,data, folderId);
-            if(result.status === "ok") {
+            if(result.status === "ok"){
               let flashcard = {
                 front_text: result.data.front_text,
                 back_text: result.data.back_text,
                 id: result.data.id,
-              }
+              };
               commit('changeFlashcard', flashcard);
               commit('showMessage');
-              //
             }
             else {
               commit('showError', result);
@@ -397,17 +369,17 @@ export default createStore({
     },
 
         
-    async removeFlashcard({ state, commit }, selected) {
+    async removeFlashcard({ state, commit }, selected){
       const method = "DELETE";
-      let folderId = state.folder.id
-      const tab = []
+      let folderId = state.folder.id;
+      const tab = [];
       for (const flashcard of selected) {
-          tab.push(flashcard.id)
+        tab.push(flashcard.id);
       }
       const data = {flashcards: tab}
       const result = await requestService.handleFlashcard(method,data, folderId);
       if(result.status === "ok") {
-        this.commit('removeAllChecked', tab)
+        this.commit('removeAllChecked', tab);
       }
       else {
         commit('showError', result);
@@ -416,10 +388,9 @@ export default createStore({
 
     async logOut({commit}){ 
       const result = await requestService.logout();
-      console.log(result)
       if(result.status === "ok") {
-        const message = 'You have successfully logged out.'
-        commit('changeSuccessMessage', message)
+        const message = 'You have successfully logged out.';
+        commit('changeSuccessMessage', message);
         router.push('/success');
       }
       else {
@@ -430,8 +401,8 @@ export default createStore({
     async removeAccount({commit}){
       const result = await requestService.removeAccount();
       if(result.status === "ok") {
-        const message = 'The account has been deleted.'
-        commit('changeSuccessMessage', message)
+        const message = 'The account has been deleted.';
+        commit('changeSuccessMessage', message);
         router.push('/success');
       }
       else {

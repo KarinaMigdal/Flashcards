@@ -10,7 +10,6 @@
 <script>
 export default {
     name: 'Header',
-
 }
 </script>
 
@@ -23,15 +22,11 @@ export default {
     position: relative;   
 }
 
-h1 {
+.logo {
+    text-align: left; 
     margin: 0;
     font-size: 42px;
     width: auto;
-}
-
-.logo {
-    text-align: left; 
-
 }
 
 .icon-main {
@@ -43,7 +38,6 @@ h1 {
         margin-left: 40px;  
     }
 }
-
 
 @media screen and (max-width: 550px) {
     .head {

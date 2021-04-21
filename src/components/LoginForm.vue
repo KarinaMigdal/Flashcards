@@ -1,35 +1,47 @@
 <template>
     <form>
-        <Form name="login_form" class="form" @submit="login" :validation-schema="schema" v-slot="{ errors }">
-            <img src="../assets/user1.svg" alt="user image"  class="icon-user icon">
+        <Form 
+        name="login_form" 
+        class="form" 
+        @submit="login" 
+        :validation-schema="schema" 
+        v-slot="{ errors }">
+            <img 
+            src="../assets/user1.svg" 
+            alt="user image"  
+            class="icon-form">
+
             <Field 
             v-model="email"
             name="email"
             type="email" 
             class="input-text" 
-            :class="{'invalid-input': errors.user_email}"
+            :class="{ 'invalid-input': errors.user_email }"
             placeholder="User email" 
             autocomplete="email" 
             maxlength="40"/>
-            
+
             <div class="form-error">
                 {{errors.user_email}}
             </div>
-            <div class="input">
-                <img src="../assets/key.svg" alt="key" class="icon-user icon">
+            <div class="input-box">
+                <img 
+                src="../assets/key.svg" 
+                alt="key" 
+                class="icon-form">
                 <img 
                 v-if="!isVisible"
                 src='../assets/visibility.svg'
                 v-bind="isVisible"
-                alt="key" 
-                class=" icon-password icon"
+                alt="toogle password visibility" 
+                class=" icon-password icon-form"
                 @click="switchVisibility">
                 <img 
                 v-if="isVisible"
                 src='../assets/invisible.svg'
                 v-bind="isVisible"
-                alt="key" 
-                class=" icon-password icon"
+                alt="toogle password visibility" 
+                class=" icon-password icon-form"
                 @click="switchVisibility">
 
                 <Field
@@ -49,21 +61,23 @@
 
             <div class="checkbox">
                 <input
+                id="keep-signed"
                 v-model="stayLogged"
                 @click="toogle"
-                type="checkbox" 
-                class="input-check checkbox-required" >
-                
-                <label for="keep_signed">Keep me signed in</label>
+                type="checkbox">
+                <label for="keep-signed">Keep me signed in</label>
             </div>
             <div class="form-error" v-show="error.isVisible">
                 {{error.message}}
             </div>
             <button 
             type="submit" 
-            class="btn buttonSubmit">Sign in</button>
-            <h5 class="footer_text" id="text_to_sign_up" >
-            <router-link class="accountText" to="/register">Sign up</router-link></h5>
+            class="btn button-submit">Sign in</button>
+            <nav>
+                <h5 class="footer-text text-to-register">
+                    <router-link class="account-text" to="/register">Sign up</router-link>
+                </h5>
+            </nav>
         </Form>
     </form>
 </template>
@@ -91,6 +105,7 @@ export default {
     computed: {
     ...mapState(['passwordFieldType', 'isVisible', 'error']),
     },
+
     created() {
         this.clearMessage()
     },
@@ -102,6 +117,7 @@ export default {
         toogle: function() {
              this.keep_logged= !this.keep_logged
         },
+        
         login() {
             let data = {
                 email: this.email,
@@ -130,13 +146,11 @@ export default {
 </script>
 
 <style>
-.input {
+.input-box {
     position: relative;
 }
-.img_user {
-    height: 70px;
-}
-.icon {
+
+.icon-form {
     margin-top: 12px;
     display: block;
     position: absolute;
@@ -169,9 +183,6 @@ export default {
     transition: border-bottom 0.4s ease-in;
 }
 
-a {
-    text-decoration: none;
-}
 
 .input-text:hover {
     border: none;
@@ -185,64 +196,42 @@ a {
     border-bottom: 1px solid black;
 }
 
-.honey-row {
-    display:none;
-}
-
 .checkbox {
     margin: 20px 45px;
 }
 
-.checkbox label {
-    margin-left: 5px; 
-}
-
-
-.buttonSubmit {
-    margin: 25px auto;
+.button-submit {
+    margin: 10px auto;
     padding: 15px 0px;
 }
 
-.buttonOnFocus {
-    background-color: rgb(221, 96, 96);
-}
-
 /* Bottom text: */
-.footer_text{
+.footer-text{
     color: rgb(87, 87, 87);
     cursor: default;
 }
 
-#text_to_sign_in::before {
-    content: "Already have an account? ";
-}
-
-#text_to_sign_up::before {
+.text-to-register::before {
     content: "Don't have an account? ";
 }
 
-.accountText, .accountText:visited {
+.account-text, .account-text:visited {
     color: black;
     transition: color 0.3s ease-in-out;
     text-decoration: none!important;
 }
 
-.accountText:hover, .accountText:visited:hover{
+.account-text:hover, .account-text:visited:hover{
     color:  rgb(236, 108, 108);
     cursor: pointer;
 }
 
 .form-error {
+    max-width: 340px;
     list-style-type: none;
     padding-inline-start: 0;
     margin-top: 0;
     color:  rgb(248, 10, 10);
-}
-
-.form-message {
-    list-style-type: none;
-    padding-inline-start: 0;
-    margin-top: 0;
 }
 
 /* For mobile: */

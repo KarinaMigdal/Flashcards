@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions, } from 'vuex';
 import GameSettings from '@/components/GameSettings.vue'
 import Score from '@/components/Score.vue'
 
@@ -68,6 +68,10 @@ export default {
     },
     methods: {
         ...mapMutations([ 'nextFlashcard', 'rate', ]), 
+        ...mapActions([ 'downloadFolders', ]),
+    },
+    created() {
+        this.downloadFolders();
     },
 }
 </script>

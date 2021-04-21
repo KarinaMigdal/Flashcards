@@ -1,25 +1,27 @@
 <template>
-    <div class="container">
+    <div class="login-container">
         <section>
-            <header>
-                <img src="../assets/checked.svg" class="icon-checked">
-                <h1>
-                Congratulations!
-                </h1>
-            </header>  
-            <main><h4>{{ success.message }}</h4></main>
-            <nav>
-                <router-link 
-                class="accountText" 
-                to="/login">
-                    <button
-                    type="submit" 
-                    class="btn succes-btn">Sign in
-                    </button>
-                </router-link>
-                <h5 class="footer_text" id="text_to_sign_up" >
-            <router-link class="accountText" to="/register">Sign up</router-link></h5>
-            </nav>
+            <div class="success-box">
+                <header>
+                    <img src="../assets/checked.svg" 
+                    class="icon-checked">
+                    <h1>Congratulations!</h1>
+                </header>  
+                <h4 class="success-message">{{ success.message }}</h4>
+                <nav>
+                    <router-link 
+                    class="accountText" 
+                    to="/login">
+                        <button
+                        type="submit" 
+                        class="btn succes-btn">Sign in
+                        </button>
+                    </router-link>
+                    <h5 class="footer-text text-to-register">
+                        <router-link class="account-text" to="/register">Sign up</router-link>
+                    </h5>
+                </nav>
+            </div>
         </section>    
     </div>
 </template>
@@ -29,19 +31,13 @@ import { mapState } from 'vuex'
 export default {
     name: 'Success',
     computed: {
-    ...mapState(['success' ]),
+    ...mapState([ 'success' ]),
   },
 }
 </script>
 
 <style scoped>
-@media screen  and (min-width: 600px) {
-    .container {
-        min-height: 500px;
-    }
-}
-
-section {
+.success-box {
     width: 350px;
     min-height: 300px;
     display: flex;
@@ -55,7 +51,7 @@ section {
     width: 100px;
 } 
 
-.container > main > h4 {
+.success-message {
     margin-bottom: 30px;
 }
 

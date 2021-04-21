@@ -1,13 +1,13 @@
 <template>
     <main>
         <div class="main-content">
-            <header><h1>Settings</h1></header>
+            <header><h1 class="header">Settings</h1></header>
             <section>
-                <div class="row">
-                    <span>Click to delete your account</span>
-                    <div class="img"><img src="../assets/delete.svg" alt="recycle bin" @click="showMessage"  class="icon-settings"></div> 
+                <div class="minor-box">
+                    <span class="settings-text">Click to delete your account</span>
+                    <div class="img"><img src="../assets/delete.svg" alt="delete" @click="showMessage"  class="icon-settings"></div> 
                 </div>
-                <div class="row alert" v-if="isVisibleMessage">
+                <div class="minor-box alert" v-if="isVisibleMessage">
                     <span>Are you sure?</span> 
                     <div class="ok" @click="removeAccount">OK</div>
                 </div>  
@@ -46,12 +46,11 @@ export default {
     overflow-y: auto;
 }
 
-span {
+.settings-text {
     font-size: 19px;
 }
 
-h1 {
-    text-transform: uppercase;
+.header {
     margin-bottom: 20px;
 }
 
@@ -79,7 +78,7 @@ h1 {
     margin-left: 5px;
 }
 
-.row {
+.minor-box {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,6 +103,14 @@ h1 {
 @media screen  and (max-width: 550px) {
     .main-content {
         height: 90vh;
+    }
+
+    .minor-box {
+        width: 300px;
+    }
+    
+    .settings-text {
+        font-size: 17px;
     }
 }
 </style>

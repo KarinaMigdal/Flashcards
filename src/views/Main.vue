@@ -22,7 +22,7 @@ export default {
     components: { SideMenu, Home, Error, Header } ,
     data () {
         return {
-            isActive:false,
+            isActive: false,
         }
     },
     computed: {

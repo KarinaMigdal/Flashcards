@@ -64,7 +64,6 @@ function downloadFolders() {
     return fetch('http://www.flashcards.com:5000/api/folders', requestOptions)
         .then(handleResponse)
         .then(result => {
-            console.log(result)
             return result;
         }).catch(error => {console.log("Error: ", error); return error});
 } 
@@ -77,7 +76,6 @@ function  downloadFlashcards(folderId) {
     return fetch(`http://www.flashcards.com:5000/api/folders/${folderId}`, requestOptions)
         .then(handleResponse)
         .then(result => {
-            console.log(result)
             return result;
         }).catch(error => {console.log("Error: ", error); return error});
 } 
@@ -115,7 +113,6 @@ function handleResponse(response) {
     return response.text().then(text => {
         let data = JSON.parse(text);
         if (!response.ok) {
-            console.log("Error: ", data)
             if (response.status === 400 ||response.status === 401) {
                 const error = `${data.data}`
                 return Promise.reject(error);

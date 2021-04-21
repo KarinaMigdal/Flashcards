@@ -1,5 +1,4 @@
-<template>
-    
+<template> 
     <div class="main-box">
        <Error class="error"/> 
        <SideMenu @buttonClicked="onClickChild"/>
@@ -8,7 +7,6 @@
             <AuthorsInfo/>
        </div>
     </div> 
-    
 </template>
 
 <script>
@@ -16,9 +14,7 @@ import SideMenu from '@/components/SideMenu.vue'
 import Error from '@/components/Error.vue'
 import AuthorsInfo from '@/components/AuthorsInfo.vue'
 import Header from '@/components/Header.vue'
-
 import { mapState } from 'vuex'
-
 
 export default {
     name: 'Main',

@@ -14,10 +14,7 @@ import SideMenu from '@/components/SideMenu.vue'
 import GameComp from '@/components/GameComp.vue'
 import Error from '@/components/Error.vue'
 import Header from '@/components/Header.vue'
-
-
-import { mapState, mapActions, } from 'vuex'
-
+import { mapState, } from 'vuex'
 
 export default {
     name: 'Main',
@@ -31,13 +28,10 @@ export default {
     ...mapState([ 'error' ]),
   },
 
-    methods: { ...mapActions([ 'fetchFolders', ]),
+    methods: {
         onClickChild (value) {
            this.isActive = !value
         }
-    },
-        created() {
-        this.fetchFolders();
     },
 }
 </script>
