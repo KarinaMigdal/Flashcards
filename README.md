@@ -1,4 +1,4 @@
-### Flashcards
+# Flashcards
 
 Traditional flashcards are small note cards used for testing 
 and   improving   memory   through   practiced  information
@@ -14,7 +14,7 @@ matters.
 ![folder](https://user-images.githubusercontent.com/77439796/115694300-04a4da80-a361-11eb-9f54-bc35be410910.gif)
 ![game](https://user-images.githubusercontent.com/77439796/115694380-18504100-a361-11eb-8ca7-fd0c2e455e0d.gif)
 
-# Dependencies 
+## Dependencies 
 * core-js: "3.6.5",
 * uuid: "^8.3.2",
 * vee-validate: "^4.2.1",
@@ -31,15 +31,15 @@ under  development).  A fully  functional application will be
 deployed soon.
 
 ## Quick Start
-# Install dependencies
+### Install dependencies
 ```
 npm install
 ```
-# Serve on localhost:8080
+### Serve on localhost:8080
 ```
 npm run serve
 ```
-# Build for production
+### Build for production
 ```
 npm run build
 ```
