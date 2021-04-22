@@ -35,16 +35,16 @@ based   on  communication with  the flashcards API (currently
 under  development).  A fully  functional application will be 
 deployed soon.
 
-## Quick Start
-### Install dependencies
+### Quick Start
+#### Install dependencies
 ```
 npm install
 ```
-### Serve on localhost:8080
+#### Serve on localhost:8080
 ```
 npm run serve
 ```
-### Build for production
+#### Build for production
 ```
 npm run build
 ```
