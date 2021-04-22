@@ -9,15 +9,15 @@ a  category  name  and  complete it with flashcards.  Done?
 Enter  Game  Mode to start learning.  Remember - regularity 
 matters.
 
-```
+
 ![validation](https://user-images.githubusercontent.com/77439796/115694450-2736f380-a361-11eb-97a9-b98c7c44ea10.PNG)
-```
+
 ![Flashcards2](https://user-images.githubusercontent.com/77439796/115693809-8c3e1980-a360-11eb-9361-a30edff20964.gif)
-```
+
 ![folder](https://user-images.githubusercontent.com/77439796/115694300-04a4da80-a361-11eb-9f54-bc35be410910.gif)
-```
+
 ![game](https://user-images.githubusercontent.com/77439796/115694380-18504100-a361-11eb-8ca7-fd0c2e455e0d.gif)
-```
+
 
 ## Dependencies 
 * core-js: "3.6.5",
