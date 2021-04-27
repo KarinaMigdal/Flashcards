@@ -20,20 +20,14 @@ matters.
 
 
 ## Dependencies 
-* core-js: "3.6.5",
-* uuid: "^8.3.2",
-* vee-validate: "^4.2.1",
-* vue: "^3.0.0",
-* vue-router: "^4.0.0-0",
-* vuex: "^4.0.0-0",
-* yup: "^0.32.9"
+
+A development project made with Vue.js.
 
 ## Limitations
 
 This is only frontend part of the project. The application is 
 based   on  communication with  the flashcards API (currently 
-under  development).  A fully  functional application will be 
-deployed soon.
+under  development).  
 
 ### Quick Start
 #### Install dependencies
