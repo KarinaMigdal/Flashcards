@@ -1,4 +1,5 @@
-import { requestService } from '../services/request.service';
+import { authenticationService, folderService, flashcardService } from '../services';
+
 import { createStore } from 'vuex';
 import router from '../router/index.js';
 
@@ -237,7 +238,7 @@ export default createStore({
 
   actions: {
     async register({ commit }, data){
-      let result = await requestService.register(data)
+      let result = await authenticationService.register(data)
       if(result.status === "ok"){
         const message = "Your account has been successfully created."
         commit('hideError');
@@ -250,7 +251,7 @@ export default createStore({
     },
 
     async login({ commit }, data){
-      let result = await requestService.login(data)
+      let result = await authenticationService.login(data)
       if(result.status === "ok"){
         commit('hideError')
         router.push('/');
@@ -261,7 +262,7 @@ export default createStore({
     },
 
     async downloadFolders({ commit }){
-      const result = await requestService.downloadFolders();
+      const result = await folderService.downloadFolders();
       if (result.status === 'ok'){
         commit('setFolders', result);
       }
@@ -280,19 +281,17 @@ export default createStore({
         commit('createNewFolder');
       }
       else {
-        const result = await requestService.downloadFlashcards(folderId);
+        const result = await flashcardService.downloadFlashcards(folderId);
         commit('setFlashcards', result.data)
       }
     },
 
     async handleFolderName({ commit, state }){
-      const url = 'http://www.flashcards.com:5000/api/folders';
       if(state.folder.id === '000') {
         const data = { 
           folderName : state.folder.name, 
         }
-        const method = "POST"
-        const result = await requestService.handleFolder(data, method, url);
+        const result = await folderService.createFolder(data);
         if (result.status === 'ok'){
           commit('changeId', result.data.id);
         router.push(`/folder/${result.data.id}`); 
@@ -306,16 +305,13 @@ export default createStore({
           folderName : state.folder.name, 
           folderId : state.folder.id,
         }
-        const method = "PUT"
-        await requestService.handleFolder(data, method, url);
+        await folderService.modifyFolder(data);
       }
     },
 
     async deleteFolder({ commit }, folderID){
-      const url = 'http://www.flashcards.com:5000/api/folders';
-      const method = "DELETE";
       const data = {folderId : folderID};
-      let result = await requestService.handleFolder(data, method, url);
+      let result = await folderService.removeFolder(data);
       if(result.status === "ok"){
         commit('removeFolder', folderID);
       }
@@ -328,8 +324,7 @@ export default createStore({
       if ( state.newFlashcard.front_text.length > 0 && state.newFlashcard.back_text.length > 0) {
         let folderId = state.folder.id;
         if(state.newFlashcard.id === '00'){
-          const method = "POST";
-            const result = await requestService.handleFlashcard(method,data, folderId);
+            const result = await flashcardService.createFlashcard(data, folderId);
             if(result.status === "ok") {
               let flashcard = {
                 front_text: result.data.front_text,
@@ -347,8 +342,7 @@ export default createStore({
         }
         else {
           data.flashcardId = state.newFlashcard.id;
-          const method = "PUT";
-            const result = await requestService.handleFlashcard(method,data, folderId);
+            const result = await flashcardService.modifyFlashcard(data, folderId);
             if(result.status === "ok"){
               let flashcard = {
                 front_text: result.data.front_text,
@@ -367,17 +361,15 @@ export default createStore({
         commit('showMessage');
       }
     },
-
-        
+ 
     async removeFlashcard({ state, commit }, selected){
-      const method = "DELETE";
       let folderId = state.folder.id;
       const tab = [];
       for (const flashcard of selected) {
         tab.push(flashcard.id);
       }
       const data = {flashcards: tab}
-      const result = await requestService.handleFlashcard(method,data, folderId);
+      const result = await flashcardService.removeFlashcard(data, folderId);
       if(result.status === "ok") {
         this.commit('removeAllChecked', tab);
       }
@@ -387,7 +379,7 @@ export default createStore({
     },
 
     async logOut({commit}){ 
-      const result = await requestService.logout();
+      const result = await authenticationService.logout();
       if(result.status === "ok") {
         const message = 'You have successfully logged out.';
         commit('changeSuccessMessage', message);
@@ -399,7 +391,7 @@ export default createStore({
     },
 
     async removeAccount({commit}){
-      const result = await requestService.removeAccount();
+      const result = await authenticationService.removeAccount();
       if(result.status === "ok") {
         const message = 'The account has been deleted.';
         commit('changeSuccessMessage', message);
